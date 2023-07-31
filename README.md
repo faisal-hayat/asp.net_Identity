@@ -26,6 +26,19 @@
 
 ## ASP.NET Core Basics
 
-- 
+- Create cross-platform application (both Web API, and Web)
+- **_Middleware Pipeline_**: (authentication, authorization, etc). Each http request must pass through middleware one by one when it is coming or going back
+
+--- ---
+
+## Security Context
+
+- Security context stores all the information that user has for security purpose
+- All this infromation is stored in one single object called **_claims principles_** 
+- **_claims principles_** also called **_Principle_** contain one or more identities of user
+
+![alt text](Assets/principle_and_claim.png "")
+
+- **_Principle_** present **_logged in user_**
 
 --- ---
