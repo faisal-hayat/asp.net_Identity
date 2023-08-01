@@ -10,8 +10,9 @@ builder.Services.AddDbContext<IdentityProject.Data.ApplicationDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
     );
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<IdentityProjectContext>();
+builder.Services.AddDefaultIdentity<IdentityProject.Models.DefaultUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
 var app = builder.Build();
 
 // These are the middlewares
