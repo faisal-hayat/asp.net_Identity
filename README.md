@@ -37,7 +37,7 @@
 - All this infromation is stored in one single object called **_claims principles_** 
 - **_claims principles_** also called **_Principle_** contain one or more identities of user
 
-![alt text](Assets/principle_and_claim.png "")
+![alt text](Assets/claim.png "")
 
 - **_Principle_** present **_logged in user_**
 
@@ -45,6 +45,75 @@
 
 ## Authorization Architecture
 
-- 
+- **_DbContext_** will look like this
+
+```c#
+using IdentityProject.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+namespace IdentityProject.Data
+{
+    public class ApplicationDbContext: IdentityDbContext<DefaultUser>
+    {
+        public ApplicationDbContext(DbContextOptions options): base(options)
+        {
+        }
+        // This is where we will be adding the Models
+        DbSet<Books> books { get; set; }
+    }
+}
+
+```
+
+- After that use **_scafolding_** to add **_identity_** to the project
+
+```c#
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using IdentityProject.Data;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<IdentityProject.Data.ApplicationDbContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    );
+
+// Identity Db Context has been added
+builder.Services.AddDefaultIdentity<IdentityProject.Models.DefaultUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+var app = builder.Build();
+
+// These are the middlewares
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthorization();
+app.UseAuthentication();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
+app.Run();
+```
+- Apply migrations to update the database
+
+```bash
+add-migration "message"
+update-database
+```
 
 --- ---
