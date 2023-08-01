@@ -42,3 +42,9 @@
 - **_Principle_** present **_logged in user_**
 
 --- ---
+
+## Authorization Architecture
+
+- 
+
+--- ---
