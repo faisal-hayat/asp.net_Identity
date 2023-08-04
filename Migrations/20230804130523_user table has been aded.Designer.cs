@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IdentityProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230801124307_IdentityDbContext has been added")]
-    partial class IdentityDbContexthasbeenadded
+    [Migration("20230804130523_user table has been aded")]
+    partial class usertablehasbeenaded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

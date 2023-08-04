@@ -14,8 +14,6 @@ namespace Identity.Controllers
             _logger = logger;
         }
 
-        [Authorize]
-        [ValidateAntiForgeryToken]
         public IActionResult Index()
         {
             return View();
