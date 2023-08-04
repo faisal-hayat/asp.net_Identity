@@ -1,4 +1,5 @@
 ﻿using Identity.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,6 +14,8 @@ namespace Identity.Controllers
             _logger = logger;
         }
 
+        [Authorize]
+        [ValidateAntiForgeryToken]
         public IActionResult Index()
         {
             return View();

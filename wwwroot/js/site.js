@@ -2,3 +2,8 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+function nameUser(int a, int b) {
+    console.log("hello world");
+    
+    
+}
